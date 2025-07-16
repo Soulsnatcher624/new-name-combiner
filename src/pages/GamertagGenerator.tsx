@@ -1,0 +1,224 @@
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Copy, Share2, Gamepad2 } from "lucide-react";
+import { generateGamertags } from "@/utils/nameGenerators";
+import { useToast } from "@/hooks/use-toast";
+
+
+const GamertagGenerator = () => {
+  const [inputs, setInputs] = useState<string[]>(["", ""]);
+  const [results, setResults] = useState<string[]>([]);
+  const [isGenerating, setIsGenerating] = useState(false);
+  const { toast } = useToast();
+
+  const handleInputChange = (index: number, value: string) => {
+    const newInputs = [...inputs];
+    newInputs[index] = value;
+    setInputs(newInputs);
+  };
+
+  const addInput = () => {
+    if (inputs.length < 9) {
+      setInputs([...inputs, ""]);
+    }
+  };
+
+  const removeInput = () => {
+    if (inputs.length > 2) {
+      setInputs(inputs.slice(0, -1));
+    }
+  };
+
+  const generateNames = () => {
+    const validInputs = inputs.filter(input => input.trim());
+    if (validInputs.length < 2) {
+      toast({
+        title: "More names needed",
+        description: "Please enter at least 2 words to generate gamertags.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsGenerating(true);
+    setTimeout(() => {
+      const generated = generateGamertags(validInputs);
+      setResults(generated);
+      setIsGenerating(false);
+      toast({
+        title: "Gamertags generated!",
+        description: `Created ${generated.length} epic gamertag combinations.`,
+      });
+    }, 1000);
+  };
+
+  const copyToClipboard = (name: string) => {
+    navigator.clipboard.writeText(name);
+    toast({
+      title: "Copied!",
+      description: `"${name}" has been copied to your clipboard.`,
+    });
+  };
+
+  const shareOnSocialMedia = (name: string) => {
+    if (navigator.share) {
+      navigator.share({
+        title: 'Check out this gamertag!',
+        text: `I found this awesome gamertag: ${name}`,
+        url: window.location.href,
+      }).catch(console.error);
+    } else {
+      copyToClipboard(`Check out this gamertag: ${name} - ${window.location.href}`);
+      toast({
+        title: "Share text copied!",
+        description: "Share text has been copied to your clipboard.",
+      });
+    }
+  };
+
+  const faqs = [
+    {
+      question: "What makes a good gamertag?",
+      answer: "A good gamertag is memorable, reflects your gaming style, is easy to type quickly, and stands out in leaderboards. It should represent your gaming personality."
+    },
+    {
+      question: "Can I use the same gamertag across all platforms?",
+      answer: "Most gamertags work across multiple platforms, but availability varies. We recommend checking each platform individually as some may already be taken."
+    },
+    {
+      question: "Should I include numbers in my gamertag?",
+      answer: "Numbers can help with availability and add a unique touch, but they're not necessary. Our generator includes both options with and without numbers."
+    },
+    {
+      question: "How do I make my gamertag more unique?",
+      answer: "Combine unexpected words, use creative spellings, or mix gaming terms with your personal interests. Our tool helps by creating unique combinations you might not think of."
+    }
+  ];
+
+  return (
+    <div className="space-y-8">
+      <div className="text-center space-y-4">
+        <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
+          Gamertag
+          <span className="gradient-primary bg-clip-text text-transparent"> Generator</span>
+        </h1>
+        <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+          Level up your gaming identity with epic gamertags that dominate leaderboards
+        </p>
+      </div>
+
+      <Card className="max-w-2xl mx-auto rounded-2xl shadow-elegant">
+        <CardHeader className="text-center">
+          <CardTitle className="flex items-center justify-center space-x-2">
+            <Gamepad2 className="h-6 w-6 text-primary" />
+            <span>Gamertag Combiner</span>
+          </CardTitle>
+          <CardDescription>
+            Combine up to 9 different words to create legendary gamertags
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <div className="grid gap-4 md:grid-cols-2">
+            {inputs.map((input, index) => (
+              <Input
+                key={index}
+                placeholder={`Game/Interest ${index + 1}`}
+                value={input}
+                onChange={(e) => handleInputChange(index, e.target.value)}
+                className="rounded-xl"
+              />
+            ))}
+          </div>
+
+          <div className="flex justify-center space-x-2">
+            {inputs.length < 9 && (
+              <Button variant="outline" onClick={addInput} className="rounded-xl">
+                Add Word
+              </Button>
+            )}
+            {inputs.length > 2 && (
+              <Button variant="outline" onClick={removeInput} className="rounded-xl">
+                Remove Word
+              </Button>
+            )}
+          </div>
+
+          <Button 
+            onClick={generateNames} 
+            disabled={isGenerating}
+            className="w-full rounded-xl"
+            size="lg"
+          >
+            {isGenerating ? "Generating..." : "Generate Gamertags"}
+          </Button>
+        </CardContent>
+      </Card>
+
+      {results.length > 0 && (
+        <Card className="max-w-2xl mx-auto rounded-2xl shadow-elegant">
+          <CardHeader>
+            <CardTitle>Generated Gamertags</CardTitle>
+            <CardDescription>
+              Here are your epic gamertag combinations
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="grid gap-3">
+              {results.map((name, index) => (
+                <div
+                  key={index}
+                  className="flex items-center justify-between p-4 bg-secondary rounded-xl transition-smooth hover:bg-secondary/80"
+                >
+                  <div className="flex items-center space-x-3">
+                    <Badge variant="outline" className="rounded-lg">
+                      {index + 1}
+                    </Badge>
+                    <span className="font-medium text-lg">{name}</span>
+                  </div>
+                  <div className="flex space-x-2">
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      onClick={() => copyToClipboard(name)}
+                      className="rounded-xl"
+                    >
+                      <Copy className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      onClick={() => shareOnSocialMedia(name)}
+                      className="rounded-xl"
+                    >
+                      <Share2 className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Editable Blog Content Area */}
+      <div className="mt-12 gradient-secondary rounded-2xl p-8 md:p-12 space-y-6">
+        <div className="text-center space-y-4">
+          <h2 className="text-3xl font-bold">About Gamertag Generator</h2>
+          <div className="prose prose-lg max-w-none text-muted-foreground">
+            <p>
+              Learn how our gamertag generator creates memorable gaming identities that help you 
+              stand out in the gaming community. Perfect for streamers, competitive players, 
+              and casual gamers alike.
+            </p>
+            {/* This section can be edited later for blog content and backlinks */}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default GamertagGenerator;
