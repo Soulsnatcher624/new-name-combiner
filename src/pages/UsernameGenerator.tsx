@@ -203,20 +203,34 @@ const UsernameGenerator = () => {
         </Card>
       )}
 
-      {/* Editable Blog Content Area */}
-      <div className="mt-12 gradient-secondary rounded-2xl p-8 md:p-12 space-y-6">
+      {/* Blog Section */}
+      <section className="bg-background rounded-2xl border p-8 md:p-12 space-y-6">
         <div className="text-center space-y-4">
-          <h2 className="text-3xl font-bold">About Username Generator</h2>
-          <div className="prose prose-lg max-w-none text-muted-foreground">
+          <h2 className="text-3xl font-bold">Everything About Username Generators</h2>
+          <div className="prose prose-lg max-w-none text-muted-foreground space-y-4 text-left">
             <p>
-              Learn how our username generator helps you create unique online identities by combining 
-              your interests and personality traits. Perfect for social media, gaming platforms, 
-              and professional accounts.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
             </p>
-            {/* This section can be edited later for blog content and backlinks */}
+            <h3 className="text-xl font-semibold text-foreground">How Username Generators Work</h3>
+            <p>
+              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+            <h3 className="text-xl font-semibold text-foreground">Best Practices For Creating Usernames</h3>
+            <p>
+              Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, 
+              eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+            </p>
+            <h3 className="text-xl font-semibold text-foreground">Common Questions About Username Generation</h3>
+            <p>
+              Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. 
+              Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.
+            </p>
+            {/* This section is editable for adding blog content and backlinks */}
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 };

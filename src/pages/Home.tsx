@@ -1,8 +1,10 @@
 import NameGenerator from "@/components/NameGenerator";
+import AdSlot from "@/components/AdSlot";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Heart, Baby, Briefcase, AtSign } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const Home = () => {
   const tools = [
@@ -37,9 +39,34 @@ const Home = () => {
   ];
 
   return (
-    <div className="space-y-16">
-      {/* Hero Section */}
-      <section className="text-center space-y-6 py-12">
+    <>
+      <Helmet>
+        <title>NameMixer - Create Perfect Name Combinations | Free Name Generator Tool</title>
+        <meta name="description" content="Create unique name combinations for couples, babies, brands, and more. Free online name generator with 9+ specialized tools. Fast, reliable, and easy to use." />
+        <meta name="keywords" content="name generator, couple names, baby names, brand names, name combiner, name mixer, free tool" />
+        <meta property="og:title" content="NameMixer - Create Perfect Name Combinations" />
+        <meta property="og:description" content="Create unique name combinations for couples, babies, brands, and more. Free online name generator with 9+ specialized tools." />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://namemixer.com" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "NameMixer",
+            "description": "Create unique name combinations for couples, babies, brands, and more",
+            "url": "https://namemixer.com",
+            "applicationCategory": "Utility",
+            "operatingSystem": "Web Browser"
+          })}
+        </script>
+      </Helmet>
+      
+      <div className="space-y-16">
+        {/* Header Ad Slot */}
+        <AdSlot id="header-banner" size="leaderboard" className="mx-auto mt-4" />
+        
+        {/* Hero Section */}
+        <section className="text-center space-y-6 py-8">
         <div className="space-y-4">
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
             Create Perfect
@@ -52,13 +79,18 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Main Generator */}
-      <section>
-        <NameGenerator />
-      </section>
+        {/* Main Generator */}
+        <section className="space-y-8">
+          <NameGenerator />
+          
+          {/* Below Generator Ad */}
+          <div className="flex justify-center">
+            <AdSlot id="below-generator" size="rectangle" />
+          </div>
+        </section>
 
       {/* Tools Section */}
-      <section className="space-y-8">
+      <section className="space-y-8 -mt-8">
         <div className="text-center space-y-4">
           <h2 className="text-3xl font-bold">Specialized Tools</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -84,13 +116,18 @@ const Home = () => {
             </Card>
           ))}
         </div>
+        
+        {/* Between Tools and Content Ad */}
+        <div className="flex justify-center py-8">
+          <AdSlot id="mid-content" size="banner" />
+        </div>
       </section>
 
       {/* Editable Blog Section */}
-      <section className="gradient-secondary rounded-2xl p-8 md:p-12 space-y-6">
+      <section className="bg-background rounded-2xl border p-8 md:p-12 space-y-6">
         <div className="text-center space-y-4">
           <h2 className="text-3xl font-bold">About NameMixer</h2>
-          <div className="prose prose-lg max-w-none text-muted-foreground">
+          <div className="prose prose-lg max-w-none text-muted-foreground space-y-4 text-left">
             <p>
               Welcome to NameMixer - your go-to destination for creating unique and meaningful name combinations. 
               Whether you're looking for couple names, baby names, brand names, or any other creative combinations, 
@@ -100,11 +137,31 @@ const Home = () => {
               Our tools are designed to be fast, reliable, and completely free to use. Simply enter your names, 
               click generate, and discover amazing combinations that sound great and have meaningful connections.
             </p>
-            {/* This section can be edited later for blog content and backlinks */}
+            <h3 className="text-xl font-semibold text-foreground">Why Choose NameMixer?</h3>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </p>
+            <p>
+              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+            {/* This section is editable for adding blog content and backlinks */}
           </div>
         </div>
+        
+        {/* Bottom Content Ad */}
+        <div className="flex justify-center pt-8">
+          <AdSlot id="bottom-content" size="rectangle" />
+        </div>
       </section>
+      
+      {/* Footer Ad */}
+      <div className="flex justify-center pb-8">
+        <AdSlot id="footer-banner" size="leaderboard" />
+      </div>
     </div>
+    </>
   );
 };
 

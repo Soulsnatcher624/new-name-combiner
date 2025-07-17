@@ -203,20 +203,34 @@ const FantasyNameGenerator = () => {
         </Card>
       )}
 
-      {/* Editable Blog Content Area */}
-      <div className="mt-12 gradient-secondary rounded-2xl p-8 md:p-12 space-y-6">
+      {/* Blog Section */}
+      <section className="bg-background rounded-2xl border p-8 md:p-12 space-y-6">
         <div className="text-center space-y-4">
-          <h2 className="text-3xl font-bold">About Fantasy Name Generator</h2>
-          <div className="prose prose-lg max-w-none text-muted-foreground">
+          <h2 className="text-3xl font-bold">Master Guide To Fantasy Name Generation</h2>
+          <div className="prose prose-lg max-w-none text-muted-foreground space-y-4 text-left">
             <p>
-              Discover how our fantasy name generator creates mystical names perfect for characters, 
-              places, and magical elements in your fantasy worlds. Ideal for game masters, fantasy 
-              writers, and world builders.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
             </p>
-            {/* This section can be edited later for blog content and backlinks */}
+            <h3 className="text-xl font-semibold text-foreground">Creating Authentic Fantasy Names</h3>
+            <p>
+              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+            <h3 className="text-xl font-semibold text-foreground">Cultural Influences In Fantasy Naming</h3>
+            <p>
+              Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, 
+              eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+            </p>
+            <h3 className="text-xl font-semibold text-foreground">Is Fantasy Name Generation Safe?</h3>
+            <p>
+              Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. 
+              Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.
+            </p>
+            {/* This section is editable for adding blog content and backlinks */}
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 };
